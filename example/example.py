@@ -2,6 +2,7 @@ import sys
 
 from thrift.protocol.TBinaryProtocol import TBinaryProtocol
 from thrift.transport.TSocket import TSocket
+from thrift.transport.TTransport import TBufferedTransport
 import sasl
 from cloudera.thrift_sasl import TSaslClientTransport
 
@@ -11,6 +12,10 @@ from TCLIService.ttypes import TOpenSessionReq, TGetTablesReq, TFetchResultsReq,
   TExecuteStatementReq, TGetOperationStatusReq, TFetchOrientation, TCloseOperationReq, \
   TCloseSessionReq, TGetSchemasReq, TGetLogReq, TCancelOperationReq
 
+## optional auth values:
+## PLAIN:  when 'hive.server2.authentication' is set as 'LDAP' or 'NONE'
+## NOSASL: when 'hive.server2.authentication' is set as 'NOSASL'
+auth = 'PLAIN' # PLAIN or NOSASL
 username = ''
 password = ''
 host = 'localhost'
@@ -60,12 +65,15 @@ try:
 
     print "1) Preparing the connection..."
     sock = TSocket(host, port)
-    transport = TSaslClientTransport(sasl_factory, "PLAIN", sock)
+    if auth == 'NOSASL':
+        transport = TBufferedTransport(sock)
+    else:
+        transport = TSaslClientTransport(sasl_factory, "PLAIN", sock)
     client = TCLIService.Client(TBinaryProtocol(transport))
     transport.open()
 
     print "\n2) Opening Session..."
-    res = client.OpenSession(TOpenSessionReq())
+    res = client.OpenSession(TOpenSessionReq(username=username, password=password))
     session = res.sessionHandle
     print('Session opened. ( %s )' % session.sessionId)
 
