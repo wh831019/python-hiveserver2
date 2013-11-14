@@ -1,0 +1,11 @@
+cloudera
+queryplan
+hive_serde
+hive_metastore
+TCLIService
+hive_service
+fb303_scripts
+hive_serde_megastruct
+hive_serde_complex
+fb303
+thrift

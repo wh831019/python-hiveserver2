@@ -10,7 +10,7 @@ from TCLIService import TCLIService
 from TCLIService.ttypes import TOpenSessionReq, TGetTablesReq, TFetchResultsReq,\
   TStatusCode, TGetResultSetMetadataReq, TGetColumnsReq, TType, TTypeId, \
   TExecuteStatementReq, TGetOperationStatusReq, TFetchOrientation, TCloseOperationReq, \
-  TCloseSessionReq, TGetSchemasReq, TGetLogReq, TCancelOperationReq
+  TCloseSessionReq, TGetSchemasReq, TCancelOperationReq
 
 ## optional auth values:
 ## PLAIN:  when 'hive.server2.authentication' is set as 'LDAP' or 'NONE'
