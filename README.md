@@ -3,7 +3,7 @@ python-hiveserver2
 
 Python thrift binding for HiveServer2 and simple query example.
 
-The binding files are compiled based on CDH4.2.1 & Thrift 0.9.
+The current binding files are compiled against Apache Hive 0.12 & Thrift 0.9.
 
 ##Usage
 ```bash
