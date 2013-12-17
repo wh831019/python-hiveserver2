@@ -129,6 +129,9 @@ try:
 
     print('-'*32)
 
+    ## important !!
+    ## don't forget to close operation & session after query
+    ## or you may cause resource leak in server side
     req = TCloseOperationReq(operationHandle=opHandle)
     client.CloseOperation(req)
 
